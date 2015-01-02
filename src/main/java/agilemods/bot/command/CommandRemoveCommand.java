@@ -3,7 +3,7 @@ package agilemods.bot.command;
 import agilemods.bot.core.LogHandler;
 import org.pircbotx.hooks.events.MessageEvent;
 
-public class CommandRemove extends BaseCommand {
+public class CommandRemoveCommand extends BaseCommand {
 
     @Override
     public String getCommand() {

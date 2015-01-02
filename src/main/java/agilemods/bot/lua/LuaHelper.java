@@ -1,7 +1,6 @@
 package agilemods.bot.lua;
 
 import agilemods.bot.core.ExtensionFilter;
-import agilemods.bot.lua.lib.CallbackLib;
 import agilemods.bot.lua.lib.HttpLib;
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.lib.jse.JsePlatform;
@@ -14,7 +13,6 @@ public class LuaHelper {
         Globals globals = JsePlatform.standardGlobals();
 
         // Global libraries
-        globals.load(new CallbackLib());
         globals.load(new HttpLib());
 
         // Global variables

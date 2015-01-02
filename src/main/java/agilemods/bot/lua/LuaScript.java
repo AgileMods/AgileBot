@@ -48,6 +48,14 @@ public class LuaScript {
         }
     }
 
+    public void setBinding(String key, LuaValue value) {
+        _g.set(key, value);
+    }
+
+    public void clearBinding(String key) {
+        _g.set(key, LuaValue.NIL);
+    }
+
     @Override
     public String toString() {
         return compiledScript == null ? "null" : compiledScript.toString();

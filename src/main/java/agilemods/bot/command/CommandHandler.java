@@ -2,8 +2,10 @@ package agilemods.bot.command;
 
 import agilemods.bot.core.LogHandler;
 import agilemods.bot.core.IOHelper;
+import agilemods.bot.core.ScriptHandler;
 import agilemods.bot.lua.LuaHelper;
 import agilemods.bot.lua.LuaScript;
+import com.google.common.base.Joiner;
 import com.google.common.collect.Maps;
 import com.google.common.io.Files;
 import org.pircbotx.Channel;
@@ -61,6 +63,11 @@ public class CommandHandler {
         }
     }
 
+    public static String getCommands() {
+        Joiner joiner = Joiner.on(",").useForNull("null");
+        return joiner.join(commandMap.keySet());
+    }
+
     static {
         loadCommands();
     }
@@ -68,11 +75,14 @@ public class CommandHandler {
     private static void loadCommands() {
         commandMap.clear();
 
-        registerCommand(new CommandAdd());
-        registerCommand(new CommandRemove());
+        registerCommand(new CommandAddCommand());
+        registerCommand(new CommandRemoveCommand());
         registerCommand(new CommandLoadCommand());
-        registerCommand(new CommandEval());
+        registerCommand(new CommandEvaluate());
         registerCommand(new CommandLoadScript());
+        registerCommand(new CommandRemoveScript());
+        registerCommand(new CommandListCommands());
+        registerCommand(new CommandListScripts());
 
         shouldSaveLua = false;
 
@@ -100,7 +110,8 @@ public class CommandHandler {
         String command = args[0].substring(1, args[0].length());
 
         if (command.equals("reload")) {
-            loadCommands();
+            CommandHandler.loadCommands();
+            ScriptHandler.loadScripts();
             channel.send().message("Reloaded " + commandMap.size() + " commands");
             return;
         }

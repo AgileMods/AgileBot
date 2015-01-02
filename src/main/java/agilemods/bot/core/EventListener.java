@@ -8,7 +8,7 @@ import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.*;
 
-import static agilemods.bot.core.CallbackHandler.*;
+import static agilemods.bot.core.ScriptHandler.*;
 
 public class EventListener extends ListenerAdapter<PircBotX> {
 
@@ -17,7 +17,7 @@ public class EventListener extends ListenerAdapter<PircBotX> {
         if (event.getMessage().startsWith("!")) {
             CommandHandler.handleMessage(event);
         }
-        CallbackHandler.fireCallback(
+        ScriptHandler.fireCallback(
                 CALLBACK_CHANNEL_MESSAGE,
                 new ChannelArg(event.getChannel()).generateTable(),
                 new UserArg(event.getUser()).generateTable(),
@@ -27,7 +27,7 @@ public class EventListener extends ListenerAdapter<PircBotX> {
 
     @Override
     public void onPrivateMessage(PrivateMessageEvent<PircBotX> event) throws Exception {
-        CallbackHandler.fireCallback(
+        ScriptHandler.fireCallback(
                 CALLBACK_PRIVATE_MESSAGE,
                 new UserArg(event.getUser()).generateTable(),
                 new MessageArg(event).generateTable()
@@ -36,7 +36,7 @@ public class EventListener extends ListenerAdapter<PircBotX> {
 
     @Override
     public void onJoin(JoinEvent<PircBotX> event) throws Exception {
-        CallbackHandler.fireCallback(
+        ScriptHandler.fireCallback(
                 CALLBACK_USER_JOIN,
                 new ChannelArg(event.getChannel()).generateTable(),
                 new UserArg(event.getUser()).generateTable()
@@ -45,7 +45,7 @@ public class EventListener extends ListenerAdapter<PircBotX> {
 
     @Override
     public void onPart(PartEvent<PircBotX> event) throws Exception {
-        CallbackHandler.fireCallback(
+        ScriptHandler.fireCallback(
                 CALLBACK_USER_PART,
                 new ChannelArg(event.getChannel()).generateTable(),
                 new UserArg(event.getUser()).generateTable()

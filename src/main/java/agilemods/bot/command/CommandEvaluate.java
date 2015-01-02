@@ -3,7 +3,7 @@ package agilemods.bot.command;
 import agilemods.bot.lua.LuaScript;
 import org.pircbotx.hooks.events.MessageEvent;
 
-public class CommandEval extends BaseCommand {
+public class CommandEvaluate extends BaseCommand {
 
     @Override
     public String getCommand() {

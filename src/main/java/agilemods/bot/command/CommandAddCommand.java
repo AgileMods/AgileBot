@@ -4,7 +4,7 @@ import agilemods.bot.core.LogHandler;
 import agilemods.bot.lua.LuaScript;
 import org.pircbotx.hooks.events.MessageEvent;
 
-public class CommandAdd extends BaseCommand {
+public class CommandAddCommand extends BaseCommand {
 
     @Override
     public String getCommand() {
