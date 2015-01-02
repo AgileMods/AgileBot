@@ -1,6 +1,5 @@
-*.iml
-commands/
 ownership/
+*.iml
 .gradle/
 .idea/
 .build/
