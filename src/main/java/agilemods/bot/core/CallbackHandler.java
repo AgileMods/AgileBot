@@ -14,7 +14,6 @@ public class CallbackHandler {
     public static final int CALLBACK_PRIVATE_MESSAGE = 1;
     public static final int CALLBACK_USER_JOIN = 2;
     public static final int CALLBACK_USER_PART = 3;
-    public static final int CALLBACK_USER_KICK = 4;
 
     private static Map<Integer, Set<LuaFunction>> callbackMap = Maps.newHashMap();
 

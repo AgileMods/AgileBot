@@ -51,13 +51,4 @@ public class EventListener extends ListenerAdapter<PircBotX> {
                 new UserArg(event.getUser()).generateTable()
         );
     }
-
-    @Override
-    public void onKick(KickEvent<PircBotX> event) throws Exception {
-        CallbackHandler.fireCallback(
-                CALLBACK_USER_KICK,
-                new ChannelArg(event.getChannel()).generateTable(),
-                new UserArg(event.getUser()).generateTable()
-        );
-    }
 }

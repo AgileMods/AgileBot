@@ -1,5 +1,5 @@
 ownership/
-src/main/java/agilemods/test/
+build/
 *.iml
 .gradle/
 .idea/
