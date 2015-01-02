@@ -1,6 +1,6 @@
-package dmillerw.agile.script;
+package agilemods.bot.script;
 
-import dmillerw.agile.wrapper.HttpWrapper;
+import agilemods.bot.wrapper.HttpWrapper;
 
 import javax.script.Bindings;
 import javax.script.ScriptEngine;

@@ -1,8 +1,8 @@
-package dmillerw.agile.management;
+package agilemods.bot.management;
 
 import com.google.common.collect.Maps;
-import dmillerw.agile.script.ChatScript;
-import dmillerw.agile.serialize.Serializer;
+import agilemods.bot.script.ChatScript;
+import agilemods.bot.serialize.Serializer;
 
 import java.util.Map;
 

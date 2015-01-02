@@ -1,13 +1,13 @@
-package dmillerw.agile.serialize;
+package agilemods.bot.serialize;
 
 import com.google.common.base.Charsets;
 import com.google.common.collect.Lists;
 import com.google.common.io.Files;
-import dmillerw.agile.management.Command;
-import dmillerw.agile.management.Ownership;
-import dmillerw.agile.script.ChatScript;
-import dmillerw.agile.serialize.thread.ThreadSaveCommands;
-import dmillerw.agile.serialize.thread.ThreadSaveOwnership;
+import agilemods.bot.management.Command;
+import agilemods.bot.management.Ownership;
+import agilemods.bot.script.ChatScript;
+import agilemods.bot.serialize.thread.ThreadSaveCommands;
+import agilemods.bot.serialize.thread.ThreadSaveOwnership;
 
 import javax.script.ScriptException;
 import java.io.*;

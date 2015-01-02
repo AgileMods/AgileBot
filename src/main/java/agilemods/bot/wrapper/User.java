@@ -1,6 +1,6 @@
-package dmillerw.agile.wrapper;
+package agilemods.bot.wrapper;
 
-import dmillerw.agile.management.Ownership;
+import agilemods.bot.management.Ownership;
 
 public class User {
 

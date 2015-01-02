@@ -1,8 +1,8 @@
-package dmillerw.agile.serialize.thread;
+package agilemods.bot.serialize.thread;
 
 import com.google.common.collect.ImmutableList;
-import dmillerw.agile.management.Ownership;
-import dmillerw.agile.serialize.Serializer;
+import agilemods.bot.management.Ownership;
+import agilemods.bot.serialize.Serializer;
 
 public class ThreadSaveOwnership extends Thread {
 

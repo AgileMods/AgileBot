@@ -1,4 +1,4 @@
-package dmillerw.agile.wrapper;
+package agilemods.bot.wrapper;
 
 import org.pircbotx.hooks.events.MessageEvent;
 

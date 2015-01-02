@@ -1,7 +1,7 @@
-package dmillerw.agile.management;
+package agilemods.bot.management;
 
 import com.google.common.collect.Sets;
-import dmillerw.agile.serialize.Serializer;
+import agilemods.bot.serialize.Serializer;
 import org.pircbotx.User;
 
 import java.util.Set;

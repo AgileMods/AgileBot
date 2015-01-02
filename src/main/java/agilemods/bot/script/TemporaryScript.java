@@ -1,6 +1,6 @@
-package dmillerw.agile.script;
+package agilemods.bot.script;
 
-import dmillerw.agile.wrapper.ResponseWrapper;
+import agilemods.bot.wrapper.ResponseWrapper;
 import org.pircbotx.Channel;
 
 import javax.script.*;

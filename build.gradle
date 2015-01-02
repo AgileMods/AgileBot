@@ -15,5 +15,5 @@ dependencies {
 
 jar {
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-    manifest { attributes 'Main-Class': 'dmillerw.agile.AgileBot' }
+    manifest { attributes 'Main-Class': 'agilemods.bot.AgileBot' }
 }

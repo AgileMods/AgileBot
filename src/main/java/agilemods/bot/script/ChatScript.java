@@ -1,7 +1,7 @@
-package dmillerw.agile.script;
+package agilemods.bot.script;
 
-import dmillerw.agile.wrapper.HttpWrapper;
-import dmillerw.agile.wrapper.Message;
+import agilemods.bot.wrapper.HttpWrapper;
+import agilemods.bot.wrapper.Message;
 import org.pircbotx.hooks.events.MessageEvent;
 
 import javax.script.*;
