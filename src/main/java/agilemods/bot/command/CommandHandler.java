@@ -1,6 +1,7 @@
 package agilemods.bot.command;
 
 import agilemods.bot.core.LogHandler;
+import agilemods.bot.core.IOHelper;
 import agilemods.bot.lua.LuaHelper;
 import agilemods.bot.lua.LuaScript;
 import com.google.common.collect.Maps;
@@ -19,7 +20,19 @@ public class CommandHandler {
 
     private static File commandDir = new File("commands/");
 
+    /**
+     * Global flag that if set, will save any LuaCommands registered to a file
+     */
+    private static boolean shouldSaveLua = false;
+
     public static void registerCommand(BaseCommand command) {
+        if (shouldSaveLua && command instanceof LuaCommand) {
+            IOHelper.saveToFile(
+                    new File(commandDir, command.getCommand() + ".lua"),
+                    ((LuaCommand) command).getScriptContents().getBytes()
+            );
+        }
+
         for (String string : command.getAliases()) {
             commandMap.put(string, command);
         }
@@ -32,6 +45,11 @@ public class CommandHandler {
     public static boolean removeCommand(String name) {
         BaseCommand command = getCommand(name);
         if (command instanceof LuaCommand) {
+            File file = new File(commandDir, command.getCommand() + ".lua");
+            if (file.exists()) {
+                file.delete();
+            }
+
             commandMap.remove(name);
             return true;
         } else {
@@ -51,7 +69,11 @@ public class CommandHandler {
         registerCommand(new CommandLoad());
         registerCommand(new CommandEval());
 
+        shouldSaveLua = false;
+
         loadLuaCommands();
+
+        shouldSaveLua = true;
     }
 
     private static void loadLuaCommands() {

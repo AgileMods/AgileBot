@@ -14,6 +14,10 @@ public class LuaCommand extends BaseCommand {
         this.luaScript = luaScript;
     }
 
+    public String getScriptContents() {
+        return luaScript.function;
+    }
+
     @Override
     public String getCommand() {
         return name;

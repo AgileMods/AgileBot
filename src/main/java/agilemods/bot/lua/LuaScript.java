@@ -1,5 +1,7 @@
 package agilemods.bot.lua;
 
+import com.google.common.base.Charsets;
+import com.google.common.io.Files;
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
 
@@ -11,20 +13,25 @@ public class LuaScript {
 
     public final Globals _g;
 
+    public String function;
+
     private LuaValue compiledScript;
 
     public LuaScript(File file) {
         _g = LuaHelper.getGlobals();
         try {
+            function = Files.toString(file, Charsets.UTF_8);
             compiledScript = _g.load(new FileReader(file), "script");
         } catch (IOException ex) {
             ex.printStackTrace();
+            function = "";
             compiledScript = null;
         }
     }
 
     public LuaScript(String script) {
         _g = LuaHelper.getGlobals();
+        function = script;
         compiledScript = _g.load(script, "script");
     }
 
