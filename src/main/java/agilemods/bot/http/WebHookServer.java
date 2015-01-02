@@ -11,6 +11,8 @@ import org.luaj.vm2.LuaValue;
 import org.pircbotx.Channel;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Map;
 
 public class WebHookServer extends NanoHTTPD {
@@ -47,6 +49,12 @@ public class WebHookServer extends NanoHTTPD {
         LuaTable table = LuaTable.tableOf();
         if (string == null || string.isEmpty()) {
             return table;
+        }
+
+        try {
+            string = URLDecoder.decode(string, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
 
         String[] split = string.split("&");
