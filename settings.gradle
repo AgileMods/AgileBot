@@ -1,2 +1,4 @@
+include 'nanohttpd/core'
+
 rootProject.name = 'AgileBot'
 

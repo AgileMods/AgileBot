@@ -6,6 +6,7 @@ import agilemods.bot.lua.LuaScript;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Maps;
 import com.google.common.io.Files;
+import fi.iki.elonen.NanoHTTPD;
 import org.luaj.vm2.LuaValue;
 
 import java.io.File;
@@ -19,6 +20,7 @@ public class ScriptHandler {
     public static final int CALLBACK_PRIVATE_MESSAGE = 1;
     public static final int CALLBACK_USER_JOIN = 2;
     public static final int CALLBACK_USER_PART = 3;
+    public static final int CALLBACK_HTTP_REQUEST = 4;
 
     private static Map<String, LuaCallbackScript> callbackMap = Maps.newHashMap();
 
@@ -67,9 +69,22 @@ public class ScriptHandler {
         return joiner.join(callbackMap.keySet());
     }
 
-    public static void fireCallback(int type, LuaValue ... args) {
+    public static Object fireCallback(int type, LuaValue ... args) {
         for (LuaCallbackScript callbackScript : callbackMap.values()) {
-            callbackScript.fireCallback(type, args);
+            if (type == CALLBACK_HTTP_REQUEST) {
+                Object obj = callbackScript.fireCallback(type, args);
+                if (obj != null && obj instanceof NanoHTTPD.Response) {
+                    return obj;
+                } else {
+                    return new NanoHTTPD.Response(NanoHTTPD.Response.Status.NO_CONTENT.getDescription());
+                }
+            } else {
+                Object obj = callbackScript.fireCallback(type, args);
+                if (obj != null && obj instanceof Boolean && ((Boolean) obj).booleanValue()) {
+                    return true;
+                }
+            }
         }
+        return null;
     }
 }

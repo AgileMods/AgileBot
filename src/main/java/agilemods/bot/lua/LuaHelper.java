@@ -20,6 +20,7 @@ public class LuaHelper {
         globals.set("CALLBACK_PRIVATE_MESSAGE", 1);
         globals.set("CALLBACK_USER_JOIN", 2);
         globals.set("CALLBACK_USER_PART", 3);
+        globals.set("CALLBACK_HTTP_REQUEST", 4);
 
         return globals;
     }

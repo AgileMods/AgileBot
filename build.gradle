@@ -1,7 +1,14 @@
+import org.ajoberstar.grgit.*
+
 apply plugin: 'java'
 
 sourceCompatibility = 1.5
 version = '1.0'
+
+buildscript {
+    repositories { mavenCentral() }
+    dependencies { classpath 'org.ajoberstar:gradle-git:0.12.0' }
+}
 
 repositories {
     mavenCentral()
@@ -11,9 +18,21 @@ dependencies {
     compile 'org.pircbotx:pircbotx:2.0.1'
     compile 'org.luaj:luaj-jse:3.0'
     compile 'org.slf4j:slf4j-simple:1.7.9'
+
+    compile project(':nanohttpd/core')
 }
 
 jar {
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     manifest { attributes 'Main-Class': 'agilemods.bot.AgileBot' }
 }
+
+task clone() {
+    def destination = file("nanohttpd")
+    def uri = "https://github.com/NanoHttpd/nanohttpd"
+    if (!destination.exists()) {
+        def grgit = Grgit.clone(dir: destination, uri: uri);
+    }
+}
+
+defaultTasks 'clone', 'build'

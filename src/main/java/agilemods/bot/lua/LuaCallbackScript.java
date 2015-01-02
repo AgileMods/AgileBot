@@ -1,7 +1,9 @@
 package agilemods.bot.lua;
 
+import agilemods.bot.core.ScriptHandler;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import fi.iki.elonen.NanoHTTPD;
 import org.luaj.vm2.LuaFunction;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.TwoArgFunction;
@@ -11,7 +13,7 @@ import java.util.Set;
 
 public class LuaCallbackScript {
 
-    private Map<Integer, Set<LuaFunction>> callbackMap = Maps.newHashMap();
+    private Map<Integer, Set<LuaFunction>> callbackMap = Maps.newConcurrentMap();
 
     public String name;
     private LuaScript luaScript;
@@ -35,11 +37,16 @@ public class LuaCallbackScript {
         getSet(type).add(callback);
     }
 
-    public void fireCallback(int type, LuaValue... args) {
+    public synchronized Object fireCallback(int type, LuaValue... args) {
         Set<LuaFunction> set = getSet(type);
         for (LuaFunction luaFunction : set) {
-            luaFunction.invoke(args);
+            if (type == ScriptHandler.CALLBACK_HTTP_REQUEST) {
+                return new NanoHTTPD.Response(luaFunction.invoke(args).toString());
+            } else if (luaFunction.invoke(args).checkboolean(0)) {
+                return true;
+            }
         }
+        return true;
     }
 
     public void call() {
