@@ -1,11 +1,14 @@
 package agilemods.bot.lua;
 
+import agilemods.bot.core.ExtensionFilter;
 import agilemods.bot.lua.lib.CallbackLib;
 import agilemods.bot.lua.lib.HttpLib;
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.lib.jse.JsePlatform;
 
 public class LuaHelper {
+
+    public static final ExtensionFilter LUA = new ExtensionFilter("lua");
 
     public static Globals getGlobals() {
         Globals globals = JsePlatform.standardGlobals();

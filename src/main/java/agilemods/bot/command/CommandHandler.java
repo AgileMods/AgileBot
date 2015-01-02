@@ -1,17 +1,23 @@
 package agilemods.bot.command;
 
 import agilemods.bot.core.LogHandler;
+import agilemods.bot.lua.LuaHelper;
+import agilemods.bot.lua.LuaScript;
 import com.google.common.collect.Maps;
+import com.google.common.io.Files;
 import org.pircbotx.Channel;
 import org.pircbotx.User;
 import org.pircbotx.hooks.events.MessageEvent;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.Map;
 
 public class CommandHandler {
 
     private static Map<String, BaseCommand> commandMap = Maps.newHashMap();
+
+    private static File commandDir = new File("commands/");
 
     public static void registerCommand(BaseCommand command) {
         for (String string : command.getAliases()) {
@@ -44,6 +50,18 @@ public class CommandHandler {
         registerCommand(new CommandRemove());
         registerCommand(new CommandLoad());
         registerCommand(new CommandEval());
+
+        loadLuaCommands();
+    }
+
+    private static void loadLuaCommands() {
+        if (!commandDir.exists() || !commandDir.isDirectory()) {
+            return;
+        }
+
+        for (File file : commandDir.listFiles(LuaHelper.LUA)) {
+            CommandHandler.registerCommand(new LuaCommand(Files.getNameWithoutExtension(file.getName()), new LuaScript(file)));
+        }
     }
 
     public static void handleMessage(MessageEvent<?> event) {

@@ -1,1 +1,1 @@
-channel.action("slaps " .. message:get_arguments())
+channel.action("slaps " .. split_args[1])
