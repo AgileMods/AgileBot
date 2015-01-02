@@ -1,0 +1,6 @@
+*.iml
+commands/
+ownership/
+.gradle/
+.idea/
+.build/
