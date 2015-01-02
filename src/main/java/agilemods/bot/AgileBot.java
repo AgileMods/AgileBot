@@ -1,7 +1,7 @@
 package agilemods.bot;
 
 import agilemods.bot.core.EventListener;
-import agilemods.bot.lua.LuaScript;
+import agilemods.bot.core.ScriptHandler;
 import org.pircbotx.Configuration;
 import org.pircbotx.PircBotX;
 import org.pircbotx.exception.IrcException;
@@ -18,6 +18,8 @@ public class AgileBot {
     }
 
     private static void startBot() throws IOException, IrcException {
+        ScriptHandler.loadScripts();
+
         Configuration<PircBotX> configuration = new Configuration.Builder<PircBotX>()
                 .setName("AgileBot")
                 .setServerHostname(IRC_HOST)

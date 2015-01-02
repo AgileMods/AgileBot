@@ -27,6 +27,10 @@ public class CommandHandler {
 
     public static void registerCommand(BaseCommand command) {
         if (shouldSaveLua && command instanceof LuaCommand) {
+            if (!commandDir.exists()) {
+                commandDir.mkdir();
+            }
+
             IOHelper.saveToFile(
                     new File(commandDir, command.getCommand() + ".lua"),
                     ((LuaCommand) command).getScriptContents()
@@ -66,8 +70,9 @@ public class CommandHandler {
 
         registerCommand(new CommandAdd());
         registerCommand(new CommandRemove());
-        registerCommand(new CommandLoad());
+        registerCommand(new CommandLoadCommand());
         registerCommand(new CommandEval());
+        registerCommand(new CommandLoadScript());
 
         shouldSaveLua = false;
 

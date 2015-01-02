@@ -17,6 +17,10 @@ public class CallbackHandler {
 
     private static Map<Integer, Set<LuaFunction>> callbackMap = Maps.newHashMap();
 
+    public static void clear() {
+        callbackMap.clear();
+    }
+
     private static Set<LuaFunction> getSet(int type) {
         Set<LuaFunction> set = callbackMap.get(type);
         if (set == null) {
