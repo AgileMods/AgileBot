@@ -29,7 +29,7 @@ public class CommandHandler {
         if (shouldSaveLua && command instanceof LuaCommand) {
             IOHelper.saveToFile(
                     new File(commandDir, command.getCommand() + ".lua"),
-                    ((LuaCommand) command).getScriptContents().getBytes()
+                    ((LuaCommand) command).getScriptContents()
             );
         }
 

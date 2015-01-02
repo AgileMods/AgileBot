@@ -1,13 +1,13 @@
 package agilemods.bot.core;
 
-import com.google.common.io.Files;
-
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class IOHelper {
 
-    public static void saveToFile(File file, byte[] data) {
+    public static void saveToFile(File file, String data) {
         ThreadSaveFile threadSaveFile = new ThreadSaveFile(file, data);
         threadSaveFile.start();
     }
@@ -16,9 +16,9 @@ public class IOHelper {
 
         public File file;
 
-        public byte[] data;
+        public String data;
 
-        public ThreadSaveFile(File file, byte[] data) {
+        public ThreadSaveFile(File file, String data) {
             this.file = file;
             this.data = data;
         }
@@ -26,7 +26,13 @@ public class IOHelper {
         @Override
         public void run() {
             try {
-                Files.write(data, file);
+                BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
+                for (String string : data.split("\n")) {
+                    bufferedWriter.write(string);
+                    bufferedWriter.newLine();
+                }
+                bufferedWriter.flush();
+                bufferedWriter.close();
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
