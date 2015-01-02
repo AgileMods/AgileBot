@@ -1,0 +1,1 @@
+message:action("pokes " .. message:get_arguments())
