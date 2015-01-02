@@ -42,6 +42,8 @@ public class CommandHandler {
 
         registerCommand(new CommandAdd());
         registerCommand(new CommandRemove());
+        registerCommand(new CommandLoad());
+        registerCommand(new CommandEval());
     }
 
     public static void handleMessage(MessageEvent<?> event) {
@@ -51,6 +53,12 @@ public class CommandHandler {
 
         String[] args = message.split(" ");
         String command = args[0].substring(1, args[0].length());
+
+        if (command.equals("reload")) {
+            loadCommands();
+            channel.send().message("Reloaded " + commandMap.size() + " commands");
+            return;
+        }
 
         BaseCommand baseCommand = commandMap.get(command);
 

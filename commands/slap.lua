@@ -1,1 +1,1 @@
-message:action("slaps " .. message:get_arguments())
+channel.action("slaps " .. message:get_arguments())

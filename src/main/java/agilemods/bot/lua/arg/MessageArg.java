@@ -35,6 +35,4 @@ public class MessageArg extends JavaArg {
         table.set("args", LuaValue.valueOf(args.toString().trim()));
         table.set("split_args", CoerceJavaToLua.coerce(splitArgs));
     }
-
-
 }

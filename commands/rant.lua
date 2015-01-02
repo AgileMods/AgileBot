@@ -12,11 +12,11 @@ end
 
 local pattern = "<name-male> likes to <verb-transitive> <noun.plural> with <pron.poss-male> pet <noun-animal> on <timenoun.plural-dayofweek>."
 
-if string.len(message:get_arguments()) > 0 then
-  pattern = message:get_arguments();
+if string.len(args) > 0 then
+  pattern = args;
 end
 
-local rant = http:post("http://berkin.me/rantbox/run", "code=" .. pattern .. "&nsfw=false")
+local rant = http.post("http://berkin.me/rantbox/run", "code=" .. pattern .. "&nsfw=false")
 local result = ""
 local lines = split(rant, '\n')
 
@@ -31,4 +31,4 @@ for k, v in pairs(lines) do
   end
 end
 
-message:reply(result)
+channel.send(result)

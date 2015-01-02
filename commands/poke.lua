@@ -1,1 +1,1 @@
-message:action("pokes " .. message:get_arguments())
+channel.action("pokes " .. message:get_arguments())

@@ -35,7 +35,7 @@ public class HttpLib extends TwoArgFunction {
 
             if (data.isstring()) {
                 try {
-                    HttpLib.post(url.toString(), data.toString());
+                    return LuaValue.valueOf(HttpLib.post(url.toString(), data.toString()));
                 } catch (IOException ex) {
                     error(ex.getMessage());
                 }

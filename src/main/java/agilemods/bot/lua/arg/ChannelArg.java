@@ -21,7 +21,7 @@ public class ChannelArg extends JavaArg {
     @Override
     public void fillTable(LuaTable table) {
         table.set("action", new action());
-        table.set("reply", new send());
+        table.set("send", new send());
 
         table.set("name", channel.getName());
         table.set("topic", channel.getTopic());
